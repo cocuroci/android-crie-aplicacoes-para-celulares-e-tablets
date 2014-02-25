@@ -1,6 +1,5 @@
 package br.com.casadocodigo.boaviagem;
 
-import android.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,6 +31,9 @@ public class DashboardActivity extends Activity {
 		switch (view.getId()) {
 			case R.id.nova_viagem:
 				startActivity(new Intent(this, ViagemActivity.class));
+				break;
+			case R.id.novo_gasto:
+				startActivity(new Intent(this, GastoActivity.class));
 				break;
 		}
 		
