@@ -7,5 +7,6 @@
     <string name="titulo">Informe seu nome</string>
     <string name="surpreenda_me">Surpreenda-me</string>
     <string name="saudacao">Olá</string>
+    <string name="title_activity_teste">Teste</string>
 
 </resources>

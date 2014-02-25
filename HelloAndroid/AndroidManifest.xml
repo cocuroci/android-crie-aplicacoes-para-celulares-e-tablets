@@ -12,14 +12,20 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@android:style/Theme.Black" >
         <activity
             android:name="br.com.casadocodigo.helloandroid.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="br.com.casadocodigo.helloandroid.SaudacaoActivity" >
+            <intent-filter>
+                <action android:name="helloandroid.ACAO_EXIBIR_SAUDACAO" />
+                <category android:name="helloandroid.CATEGORIA_SAUDACAO" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
     </application>

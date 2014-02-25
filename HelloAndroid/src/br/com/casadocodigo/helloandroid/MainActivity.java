@@ -2,6 +2,7 @@ package br.com.casadocodigo.helloandroid;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.text.Editable;
 import android.view.Menu;
 import android.view.View;
@@ -11,8 +12,8 @@ import android.widget.TextView;
 public class MainActivity extends Activity {
 	
 	private EditText nomeEditText;
-	private TextView saudacaoTextView;
-	private String saudacao; 
+	//private TextView saudacaoTextView;
+	//private String saudacao; 
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -20,8 +21,8 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		this.nomeEditText = (EditText)findViewById(R.id.nomeEditText);
-		this.saudacaoTextView = (TextView)findViewById(R.id.saudacaoTextView);
-		this.saudacao = getResources().getString(R.string.saudacao);
+		//this.saudacaoTextView = (TextView)findViewById(R.id.saudacaoTextView);
+		//this.saudacao = getResources().getString(R.string.saudacao);
 	}
 
 	@Override
@@ -32,9 +33,13 @@ public class MainActivity extends Activity {
 	}
 	
 	public void surpreenderUsuario(View view) {
-		Editable texto = this.nomeEditText.getText();
-		String msg = this.saudacao + " " + texto;
-		this.saudacaoTextView.setText(msg);
+		String texto = this.nomeEditText.getText().toString();
+		//String msg = this.saudacao + " " + texto;
+		//this.saudacaoTextView.setText(msg);
+		
+		Intent intent = new Intent(SaudacaoActivity.ACAO_EXIBIR_SAUDACAO);
+		intent.addCategory(SaudacaoActivity.CATEGORIA_SAUDACAO);
+		intent.putExtra(SaudacaoActivity.EXTRA_NOME_USUARIO, texto);
+		startActivity(intent);		
 	}
-
 }

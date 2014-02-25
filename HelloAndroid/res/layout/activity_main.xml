@@ -33,10 +33,4 @@
         android:onClick="surpreenderUsuario"        
         />
     
-    <TextView
-        android:id="@+id/saudacaoTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-    
 </LinearLayout>
