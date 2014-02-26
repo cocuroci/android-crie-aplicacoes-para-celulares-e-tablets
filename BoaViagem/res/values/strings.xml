@@ -36,4 +36,8 @@
         <item>Outros</item>
     </string-array>
 
+    <string name="title_activity_viagem_list">ViagemListActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_gasto_list">GastoListActivity</string>
+
 </resources>

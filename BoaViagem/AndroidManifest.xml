@@ -18,15 +18,23 @@
             android:label="@string/app_name" >
         </activity>
         <activity android:name="br.com.casadocodigo.boaviagem.DashboardActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name="br.com.casadocodigo.boaviagem.ViagemActivity" >
         </activity>
+        <activity android:name="br.com.casadocodigo.boaviagem.GastoActivity" >
+        </activity>
         <activity
-            android:name="br.com.casadocodigo.boaviagem.GastoActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:name="br.com.casadocodigo.boaviagem.ViagemListActivity"
+            android:label="@string/title_activity_viagem_list" >
+        </activity>
+        <activity
+            android:name="br.com.casadocodigo.boaviagem.GastoListActivity"
+            android:label="@string/title_activity_gasto_list" >
         </activity>
     </application>
 

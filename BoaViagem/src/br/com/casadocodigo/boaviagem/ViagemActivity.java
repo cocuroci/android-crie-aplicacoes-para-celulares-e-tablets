@@ -1,15 +1,36 @@
 package br.com.casadocodigo.boaviagem;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.DatePickerDialog.OnDateSetListener;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
 
 public class ViagemActivity extends Activity {
+	
+	private Date dataChegada, dataSaida;
+	private int ano, mes, dia;
+	private Button dataChegadaButton, dataSaidaButton;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_viagem);
+		
+		Calendar calendar = Calendar.getInstance();
+		ano = calendar.get(Calendar.YEAR);
+		mes = calendar.get(Calendar.MONTH);
+		dia = calendar.get(Calendar.DAY_OF_MONTH);
+
+		dataChegadaButton = (Button) findViewById(R.id.dataChegada);
+		dataSaidaButton = (Button) findViewById(R.id.dataSaida);
 	}
 
 	@Override
@@ -18,5 +39,41 @@ public class ViagemActivity extends Activity {
 		getMenuInflater().inflate(R.menu.dashboard, menu);
 		return true;
 	}
+	
+	@Override
+	protected Dialog onCreateDialog(int id) {
+		switch (id) {
+		case R.id.dataChegada:
+			return new DatePickerDialog(this, dataChegadaListener, ano, mes, dia);
+
+		case R.id.dataSaida:
+			return new DatePickerDialog(this, dataSaidaListener, ano, mes, dia);
+		}
+		return null;
+	}
+
+	private OnDateSetListener dataChegadaListener = new OnDateSetListener() {
+		public void onDateSet(DatePicker view, int anoSelecionado, int mesSelecionado, int diaSelecionado) {
+			dataChegada = criarData(anoSelecionado, mesSelecionado, diaSelecionado);
+			dataChegadaButton.setText(dia + "/" + (mes + 1) + "/" + ano);
+		}
+	};
+
+	private OnDateSetListener dataSaidaListener = new OnDateSetListener() {
+		public void onDateSet(DatePicker view, int anoSelecionado, int mesSelecionado, int diaSelecionado) {
+			dataSaida = criarData(anoSelecionado, mesSelecionado, diaSelecionado);
+			dataSaidaButton.setText(dia + "/" + (mes + 1) + "/" + ano);
+		}
+	};
+
+	private Date criarData(int anoSelecionado, int mesSelecionado, int diaSelecionado) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(anoSelecionado, mesSelecionado, diaSelecionado);
+		return calendar.getTime();
+	}
+	
+	public void selecionarData(View view) {
+		showDialog(view.getId());
+	} 
 	
 }
