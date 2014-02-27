@@ -27,6 +27,8 @@
     <string name="descricao">Descrição</string>
     <string name="local">Local</string>
     <string name="gastei">Gastei!</string>
+    <string name="sair">Sair</string>
+    <string name="remover_viagem">Remover</string>
 
     <string-array name="categoria_gasto">
         <item>Alimentação</item>

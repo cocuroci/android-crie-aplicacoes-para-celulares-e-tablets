@@ -7,9 +7,13 @@ import java.util.Map;
 
 import android.app.ListActivity;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.SimpleAdapter;
 import android.widget.SimpleAdapter.ViewBinder;
@@ -31,6 +35,9 @@ public class GastoListActivity extends ListActivity implements OnItemClickListen
 		setListAdapter(adapter);
 		
 		getListView().setOnItemClickListener(this);
+		
+		//register context menu
+		registerForContextMenu(getListView());
 	}
 
 	private List<Map<String, Object>> listarGastos() {
@@ -66,22 +73,33 @@ public class GastoListActivity extends ListActivity implements OnItemClickListen
 		
 		return gastos;
 	}
-
+	
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
+	public void onCreateContextMenu(ContextMenu menu, View view, ContextMenuInfo menuInfo) {
 		getMenuInflater().inflate(R.menu.gasto_list, menu);
-		return true;
 	}
-
+	
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+		
+		if (item.getItemId() == R.id.remover) {
+			AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+			gastos.remove(info.position);
+			getListView().invalidateViews();
+			dataAnterior = "";
+			return true;
+		}
+		
+		return super.onContextItemSelected(item);
+	}
+	
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {		
 		Map<String, Object> map = gastos.get(position);
 		String descricao = (String) map.get("descricao");
 		String mensagem = "Gasto selecionado: "+ descricao;
 		Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();		
-	}
-	
+	}	
 	
 	private String dataAnterior = "";
 	

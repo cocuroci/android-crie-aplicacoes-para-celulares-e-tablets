@@ -2,12 +2,11 @@ package br.com.casadocodigo.boaviagem;
 
 import java.util.Calendar;
 
-import android.os.Bundle;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.Dialog;
-import android.view.Menu;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -38,13 +37,6 @@ public class GastoActivity extends Activity {
 		categoria.setAdapter(adapter);
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.gasto, menu);
-		return true;
-	}
-	
 	@Override
 	public Dialog onCreateDialog(int id) {
 		if (R.id.data == id) {

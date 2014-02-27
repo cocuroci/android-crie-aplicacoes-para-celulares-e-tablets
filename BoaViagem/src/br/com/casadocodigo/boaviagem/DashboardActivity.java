@@ -4,9 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-//import android.widget.TextView;
-//import android.widget.Toast;
 
 public class DashboardActivity extends Activity {
 
@@ -23,11 +22,13 @@ public class DashboardActivity extends Activity {
 		return true;
 	}
 	
-	public void selecionarOpcao(View view) {
-//		TextView textView = (TextView) view;
-//		String opcao = "Opção: " + textView.getText().toString();
-//		Toast.makeText(this, opcao, Toast.LENGTH_SHORT).show();		
-		
+	@Override
+	public boolean onMenuItemSelected(int featuredId, MenuItem item) {
+		finish();
+		return false;
+	}
+	
+	public void selecionarOpcao(View view) {		
 		switch (view.getId()) {
 			case R.id.nova_viagem:
 				startActivity(new Intent(this, ViagemActivity.class));
