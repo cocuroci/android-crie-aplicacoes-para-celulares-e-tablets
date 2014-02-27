@@ -29,6 +29,13 @@
     <string name="gastei">Gastei!</string>
     <string name="sair">Sair</string>
     <string name="remover_viagem">Remover</string>
+    <string name="remover">Remover</string>
+    <string name="editar">Editar</string>
+    <string name="gastos_realizados">Gastos Realizados</string>
+     <string name="opcoes">Opções</string>
+     <string name="confirmacao_exclusao_viagem">Deseja realmente remover a viagem?</string>
+     <string name="sim">Sim</string>
+     <string name="nao">Não</string>
 
     <string-array name="categoria_gasto">
         <item>Alimentação</item>

@@ -5,10 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.SimpleAdapter;
@@ -17,6 +20,9 @@ import android.widget.Toast;
 public class ViagemListActivity extends ListActivity implements OnItemClickListener {
 
 	private List<Map<String, Object>> viagens;
+	private AlertDialog alertDialog;
+	private AlertDialog dialogoConfirmacao;
+	private int viagemSelecionada;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +35,9 @@ public class ViagemListActivity extends ListActivity implements OnItemClickListe
 		setListAdapter(adapter);
 		
 		getListView().setOnItemClickListener(this);
+		
+		this.alertDialog = criarAlertDialog();
+		this.dialogoConfirmacao = criarDialogoConfirmacao();
 	}
 
 	private List<Map<String, Object>> listarViagens() {
@@ -50,14 +59,68 @@ public class ViagemListActivity extends ListActivity implements OnItemClickListe
 		
 		return viagens;
 	}
+	
+	private AlertDialog criarAlertDialog() {
+		final CharSequence[] items = {
+				getString(R.string.editar),
+				getString(R.string.novo_gasto),
+				getString(R.string.gastos_realizados),
+				getString(R.string.remover_viagem),
+		};
+		
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(R.string.opcoes);
+		builder.setItems(items, clickInAlertOptions());
+		
+		return builder.create();
+	}
+	
+	private AlertDialog criarDialogoConfirmacao() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage(R.string.confirmacao_exclusao_viagem);
+		builder.setPositiveButton(R.string.sim, clickInAlertOptions());
+		builder.setNegativeButton(R.string.nao, clickInAlertOptions());
+		
+		return builder.create();
+	}
+	
+	private DialogInterface.OnClickListener clickInAlertOptions() {
+		return new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				switch (which) {
+				case 0:
+					startActivity(new Intent(getBaseContext(), ViagemActivity.class));
+					break;
+				case 1:
+					startActivity(new Intent(getBaseContext(), GastoActivity.class));
+					break;
+				case 2:
+					startActivity(new Intent(getBaseContext(), GastoListActivity.class));
+					break;
+				case 3:
+					dialogoConfirmacao.show();
+					break;
+				case DialogInterface.BUTTON_POSITIVE:
+					viagens.remove(viagemSelecionada);
+					getListView().invalidateViews();
+					break;
+				case DialogInterface.BUTTON_NEGATIVE:
+					dialogoConfirmacao.dismiss();
+					break;
+				}
+			}
+		};		
+	}
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		Map<String, Object> map = viagens.get(position);
-		String destido = (String) map.get("destino");
-		String mensagem = "Viagem selecionada: " + destido;
-		Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show();
-		
-		startActivity(new Intent(this, GastoListActivity.class));
+//		Map<String, Object> map = viagens.get(position);
+//		String destido = (String) map.get("destino");
+//		String mensagem = "Viagem selecionada: " + destido;
+//		Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show();		
+		this.viagemSelecionada = position;
+		this.alertDialog.show();
 	}
 }
